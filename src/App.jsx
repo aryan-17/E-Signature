@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import CanvasDraw from "react-canvas-draw";
 import SelectionBtn from "./components/SelectionBtn";
@@ -16,11 +16,6 @@ function App() {
 
   const clearHandler = () => {
     draw.current.eraseAll();
-    console.log(localStorage.getItem("canvas"));
-  };
-  const saveHandler = () => {
-    const savedData = draw.current.canvas.drawing.toDataURL("image/png", 1.0);
-    localStorage.setItem("canvas", savedData);
   };
 
   const undoHandler = () => {
@@ -32,15 +27,16 @@ function App() {
       {
         menu.map((ele) => {
           return (
-            <Menu.Item key={ele.type} danger>
+            <Menu.Item key={ele.type} danger  className="bg-[#F06449]">
               <Popconfirm
                 title="Download the signature"
                 description="Do you want to download this signature?"
                 onConfirm={() => downloadHandler(ele.type)}
                 okText="Yes"
                 cancelText="No"
+                className="bg-[#F06449]"
               >
-                <Button danger type="primary">
+                <Button className="bg-[#F06449]" danger  type="primary">
                   {ele.type}
                 </Button>
               </Popconfirm>
@@ -52,8 +48,7 @@ function App() {
   );
 
   const downloadHandler = (id) => {
-    if (localStorage.getItem("canvas") !== null) {
-      const url = localStorage.getItem("canvas");
+      const url = draw.current.canvas.drawing.toDataURL("image/png", 1.0);
 
       if (id === 'PDF') {
         const pdf = new jsPDF();
@@ -72,13 +67,11 @@ function App() {
         return;
       }
       return;
-    }
-    return alert("Save the Signature First");
   };
 
   return (
-    <div>
-      <div>
+    <div className="bg-[url('./data/gradient.png')] flex flex-col gap-y-10 items-center justify-between h-screen">
+      <div className="flex gap-10 mt-5 lg:flex-row md:flex-row sm:flex-col">
         <SelectionBtn
           text={"Brush Color"}
           property={color}
@@ -98,14 +91,13 @@ function App() {
           type={type[0]}
         />
       </div>
-      <div className="w-screen">
-        <CanvasDraw ref={draw} brushRadius={radius} brushColor={color} lazyRadius={0} />
+      <div>
+        <CanvasDraw ref={draw} brushRadius={radius} brushColor={color} lazyRadius={0}/>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 mb-10">
         <FunctionBtn text={"Clear"} type="danger" func={clearHandler} />
-        <FunctionBtn text={"Save"} type="primary" func={saveHandler} />
         <FunctionBtn text={"Undo"} type="primary" func={undoHandler} />
-        <Dropdown.Button trigger={["click"]} danger type="primary" overlay={menuItems}>Download as a </Dropdown.Button>
+        <Dropdown.Button danger trigger={["click"]} className="! bg-[#F06449]" type="primary" overlay={menuItems}>Download as a </Dropdown.Button>
 
       </div>
     </div>
