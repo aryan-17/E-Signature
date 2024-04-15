@@ -98,7 +98,7 @@ function App() {
   };
 
   return (
-    <div className="bg-[url('./data/gradient.png')] flex flex-col gap-y-10 items-center justify-between h-screen">
+    <div className="bg-[url('./data/gradient.png')] flex flex-col items-center justify-between h-screen">
       <div className="flex gap-5 mt-5 lg:flex-row md:flex-row sm:flex-col">
         <SelectionBtn
           text={"Brush Color"}
@@ -122,7 +122,7 @@ function App() {
       <div>
         <CanvasDraw ref={draw} brushRadius={radius} brushColor={color} lazyRadius={0}/>
       </div>
-      <div className="flex gap-4 mb-10">
+      <div className="flex gap-4 mb-20">
         <FunctionBtn text={"Clear"} type="danger" func={clearHandler} />
         <FunctionBtn text={"Undo"} type="primary" func={undoHandler} />
         <Dropdown.Button danger trigger={["click"]} className="! bg-[#F06449]" type="primary" overlay={menuItems}>Download as a </Dropdown.Button>
