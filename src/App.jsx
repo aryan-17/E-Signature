@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import CanvasDraw from "react-canvas-draw";
 import SelectionBtn from "./components/SelectionBtn";
