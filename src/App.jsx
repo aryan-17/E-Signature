@@ -65,7 +65,7 @@ function App() {
         />
       </div>
       <div>
-        <CanvasDraw ref={draw} brushRadius={radius} brushColor={color} />
+        <CanvasDraw ref={draw} brushRadius={radius} brushColor={color} lazyRadius={0} />
       </div>
       <div className="flex gap-4">
         <FunctionBtn text={"Clear"} type="danger" func={clearHandler} />
