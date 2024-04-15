@@ -2,7 +2,7 @@ import { ColorPicker, Slider } from 'antd'
 import React from 'react'
 const SelectionBtn = ({ text, property, setProperty, type }) => {
     return (
-        <div className='flex gap-3 items-center bg-[#9DB7CD] p-2 rounded-md' >
+        <div className='flex gap-3 items-center justify-around bg-[#9DB7CD] p-2 rounded-md' >
             <span>Select {text}: </span>
             {
                 type === 'color' && <ColorPicker value={property} onChange={(e) => {
