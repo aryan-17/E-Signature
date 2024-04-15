@@ -48,25 +48,53 @@ function App() {
   );
 
   const downloadHandler = (id) => {
-      const url = draw.current.canvas.drawing.toDataURL("image/png", 1.0);
-
-      if (id === 'PDF') {
+    const randomInt = Math.floor(Math.random()*1000).toString();
+    if (id === 'PDF') {
+        const url = draw.current.canvas.drawing.toDataURL("image/png", 1.0);
         const pdf = new jsPDF();
+        const name = "Signature"+randomInt+".pdf";
         pdf.setFillColor(bgColor);
         pdf.rect(0, 0, 210, 297, "F");
         pdf.addImage(url, "PNG", 0, 0, 210, 297); // A4 size: 210 x 297 mm
-        pdf.save("Signature.pdf");
-        return;
+        pdf.save(name);
       }
 
+      // if (id === 'JPG') {
+      //   const url = draw.current.canvas.drawing.toDataURL("image/jpg", 1.0);
+      //   const name = "Signature"+randomInt+".jpg";
+      //   const a = document.createElement('a');
+      //   a.href = url;
+      //   a.download = name;
+      //   a.click();
+      // }
       if (id === 'JPG') {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'my_drawing.jpg';
-        a.click();
-        return;
+        const name = "Signature" + randomInt + ".jpg";
+        const url = draw.current.canvas.drawing.toDataURL("image/jpg", 1.0);
+      
+        const canvas = document.createElement('canvas');
+        canvas.width = 210;  // A4 width in mm
+        canvas.height = 297; // A4 height in mm
+      
+        const ctx = canvas.getContext('2d');
+      
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+        const img = new Image();
+        img.src = url;
+      
+        img.onload = function() {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+          const jpgUrl = canvas.toDataURL("image/jpeg", 1.0);
+      
+          const a = document.createElement('a');
+          a.href = jpgUrl;
+          a.download = name;
+      
+          a.click();
+        };
       }
-      return;
   };
 
   return (
