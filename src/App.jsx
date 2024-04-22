@@ -98,7 +98,7 @@ function App() {
   };
 
   return (
-    <div className="bg-[url('./data/gradient.png')] flex flex-col items-center justify-between h-screen">
+    <div className="bg-gradient-to-r from-blue-500 to-purple-700 flex flex-col items-center justify-between h-screen">
       <div className="flex gap-5 mt-5 lg:flex-row md:flex-row sm:flex-col">
         <SelectionBtn
           text={"Brush Color"}
